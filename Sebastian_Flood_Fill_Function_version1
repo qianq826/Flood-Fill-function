@@ -1,1 +1,44 @@
 #this is Sebastian first version flood fill function 
+board = [
+    "......................",
+    "......##########......",
+    "......#........#......",
+    "......#........#......",
+    "......#........#####..",
+    "....###............#..",
+    "....#............###..",
+    "....##############....",
+]
+
+
+def flood_fill(input_board, old, new, x, y):      #check if the x and y in within the code 
+    if (x < 0 or x >= len(input_board)               
+       or y < 0 or y >= len(input_board[0])            
+       or input_board[x][y] != old):                      
+      return input_board
+
+  
+    input_board[x] = input_board[x][:y] + new + input_board[x][y+1:] # change the value of the original 
+
+    flood_fill(input_board, old, new, x+1, y) # right
+    flood_fill(input_board, old, new, x-1, y) # left
+    flood_fill(input_board, old, new, x, y+1) # down
+    flood_fill(input_board, old, new, x, y-1) # up
+    
+    return input_board
+
+
+board_flooded1 = board.copy() # copy the original board for the first flood fill 
+
+modified_board = flood_fill(input_board = board_flooded1, old = ".", new = "~", x = 5, y = 12)
+
+for a in modified_board:   # print the flood fill 1
+    print(a)
+
+
+board_flooded2 = board.copy() # copy the original board for the second flood fill 
+
+modified_board = flood_fill(input_board = board_flooded2, old = ".", new = "~",  x= 1, y = 1)
+
+for a in modified_board:  # print the flood fill 2
+    print(a)
